@@ -36,7 +36,6 @@ spec:
     - --runtime-config=extensions/v1beta1=true,extensions/v1beta1/networkpolicies=true,rbac.authorization.k8s.io/v1beta1=true,extensions/v1beta1/podsecuritypolicy=true
     - --feature-gates=ExperimentalCriticalPodAnnotation=true
     - --authorization-mode=RBAC
-    - --service-node-port-range=30-32767
     - --storage-backend=etcd3
     - --apiserver-count={{ apiserver_count }}
     - --anonymous-auth=false
