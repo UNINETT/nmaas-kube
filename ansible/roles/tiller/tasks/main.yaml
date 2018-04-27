@@ -1,0 +1,27 @@
+- name: Generate Tiller certificate
+  command: ./tls/generate_cert.sh tiller server tiller-server
+  args:
+    creates: tls/tiller/tiller-server.pem
+
+- name: Clear Tiller configuration directory
+  file:
+    dest: ./tiller_config
+    state: absent
+- name: Prepare Tiller configuration directory
+  file:
+    dest: ./tiller_config
+    state: directory
+
+- name: Initialize templated configuration files
+  template:
+    src: "{{ item }}"
+    dest: "./tiller_config/{{ item | basename | regex_replace('\\.j2$','') }}"
+  with_fileglob:
+  - '../templates/*.yaml.j2'
+
+- name: Create Tiller certificates secret
+  command: kubectl apply -f ./tiller_config/tiller/certs.yaml
+- name: Create Tiller deployment
+  command: kubectl apply -f ./tiller_config/tiller/deployment.yaml
+- name: Create Tiller service
+  command: kubectl apply -f ./tiller_config/tiller/svc.yaml
