@@ -51,7 +51,7 @@ spec:
         - mountPath: /etc/certs
           name: tiller-certs
           readOnly: true
-#      serviceAccountName: sjefen
+      serviceAccountName: nmaas-admin
       volumes:
       - name: tiller-certs
         secret:
