@@ -6,3 +6,4 @@
   - vars.yaml
   roles:
   - cluster_config
+  - tiller
