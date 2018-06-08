@@ -20,8 +20,8 @@
   - '../templates/*.yaml.j2'
 
 - name: Create Tiller certificates secret
-  command: kubectl apply -f ./tiller_config/tiller/certs.yaml
+  command: kubectl apply -f ./tiller_config/certs.yaml
 - name: Create Tiller deployment
-  command: kubectl apply -f ./tiller_config/tiller/deployment.yaml
+  command: kubectl apply -f ./tiller_config/deployment.yaml
 - name: Create Tiller service
-  command: kubectl apply -f ./tiller_config/tiller/svc.yaml
+  command: kubectl apply -f ./tiller_config/svc.yaml
