@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: helm
+    name: helm
+  name: helm-deploy
+  namespace: nmaas
+spec:
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: helm
+        name: helm
+    spec:
+      containers:
+      - env:
+        - name: SSH_USERS
+          value: helm:1000:1000
+        image: docker.io/mbrekkevold/ssh-helm:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 22
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        name: helm
+        ports:
+        - containerPort: 22
+          name: helm
+        readinessProbe:
+          tcpSocket:
+            port: 22
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        resources: {}
+        volumeMounts:
+        - mountPath: /home/helm/.helm
+          name: helm-certs
+          readOnly: true
+        - mountPath: /etc/authorized_keys
+          name: helm-ssh-keys
+          readOnly: true
+      volumes:
+      - name: helm-certs
+        secret:
+          secretName: helm-secret
+      - name: helm-ssh-keys
+        secret:
+          secretName: helm-ssh-keys
+          defaultMode: 256
+          items:
+            - key: id_rsa_helm.pub
+              path: helm
+status: {}

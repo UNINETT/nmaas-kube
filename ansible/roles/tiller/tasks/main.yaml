@@ -25,3 +25,24 @@
   command: kubectl apply -f ./tiller_config/deployment.yaml
 - name: Create Tiller service
   command: kubectl apply -f ./tiller_config/svc.yaml
+
+# SSH+Helm cluster internal service
+
+- name: Generate Helm client certificate
+  command: ./tls/generate_cert.sh tiller server helm-client
+  args:
+    creates: tls/tiller/helm-client.pem
+
+- name: Generate Helm user SSH key pair
+  command: ssh-keygen -t rsa -f tiller_config/id_rsa_helm -N ""
+  args:
+    creates: tiller_config/id_rsa_helm
+
+- name: Create Helm client certificates secret
+  command: kubectl apply -f ./tiller_config/helm-certs.yaml
+
+- name: Create SSH+Helm deployment
+  command: kubectl apply -f ./tiller_config/helm-deployment.yaml
+
+- name: Create Helm SSH service
+  command: kubectl apply -f ./tiller_config/helm-svc.yaml
