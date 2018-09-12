@@ -9,9 +9,9 @@
     creates: tls/tiller/helm-client.pem
 
 - name: Generate Helm user SSH key pair
-  command: ssh-keygen -t rsa -f tiller_config/id_rsa_helm -N ""
+  command: ssh-keygen -t rsa -f tls/tiller/id_rsa_helm -N ""
   args:
-    creates: tiller_config/id_rsa_helm
+    creates: tls/tiller/id_rsa_helm
 
 - name: Clear Tiller configuration directory
   file:

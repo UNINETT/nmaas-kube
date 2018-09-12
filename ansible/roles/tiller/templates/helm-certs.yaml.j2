@@ -14,8 +14,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  id_rsa_helm: {{ lookup('file', 'id_rsa_helm')|b64encode }}
-  id_rsa_helm.pub: {{ lookup('file', 'id_rsa_helm.pub')|b64encode }}
+  id_rsa_helm: {{ lookup('file', 'tls/tiller/id_rsa_helm')|b64encode }}
+  id_rsa_helm.pub: {{ lookup('file', 'tls/tiller/id_rsa_helm.pub')|b64encode }}
 kind: Secret
 metadata:
   labels:
