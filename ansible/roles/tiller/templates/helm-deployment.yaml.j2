@@ -20,6 +20,10 @@ spec:
       - env:
         - name: SSH_USERS
           value: helm:1000:1000
+        - name: TILLER_NAMESPACE
+          value: nmaas
+        - name: HELM_HOST
+          value: helm-deploy:44134
         image: docker.io/mbrekkevold/ssh-helm:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
