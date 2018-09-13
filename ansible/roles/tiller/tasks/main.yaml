@@ -4,7 +4,7 @@
     creates: tls/tiller/tiller-server.pem
 
 - name: Generate Helm client certificate
-  command: ./tls/generate_cert.sh tiller server helm-client
+  command: ./tls/generate_cert.sh tiller client helm-client
   args:
     creates: tls/tiller/helm-client.pem
 
