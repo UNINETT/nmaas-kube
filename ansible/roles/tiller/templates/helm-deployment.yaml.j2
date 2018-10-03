@@ -23,7 +23,7 @@ spec:
         - name: TILLER_NAMESPACE
           value: nmaas
         - name: HELM_HOST
-          value: helm-deploy:44134
+          value: tiller-deploy:44134
         image: docker.io/mbrekkevold/ssh-helm:latest
         imagePullPolicy: IfNotPresent
         livenessProbe:
