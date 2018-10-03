@@ -25,7 +25,7 @@ spec:
         - name: HELM_HOST
           value: tiller-deploy:44134
         image: docker.io/mbrekkevold/ssh-helm:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
             port: 22
