@@ -16,6 +16,7 @@ spec:
         app: helm
         name: helm
     spec:
+      serviceAccountName: nmaas-admin
       containers:
       - env:
         - name: SSH_USERS
