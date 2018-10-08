@@ -46,22 +46,47 @@ spec:
           initialDelaySeconds: 5
           timeoutSeconds: 5
         resources: {}
+
         volumeMounts:
         - mountPath: /home/helm/certs
           name: helm-certs
           readOnly: true
         - mountPath: /etc/authorized_keys
-          name: helm-ssh-keys
+          name: shared-data
           readOnly: true
+
+      initContainers:
+        # Init container to grab a copy of the helm user's authorized ssh keys
+        # since sshd doesn't like it being a symlink
+        - name: sshd-authorized-keys-init
+          image: "alpine:3.8"
+          command:
+            - sh
+            - -c
+            - |
+              cp /tmp/authorized_keys/id_rsa_helm.pub /etc/authorized_keys/helm
+          volumeMounts:
+            - name: helm-ssh-keys
+              mountPath: /tmp/authorized_keys
+              readOnly: true
+            - name: shared-data
+              mountPath: /etc/authorized_keys
+              readOnly: false
+
       volumes:
+      - name: shared-data
+        emptyDir: {}
+
       - name: helm-certs
         secret:
           secretName: helm-certs
+
       - name: helm-ssh-keys
         secret:
           secretName: helm-ssh-keys
           defaultMode: 256
           items:
             - key: id_rsa_helm.pub
-              path: helm
+              path: id_rsa_helm.pub
+
 status: {}
