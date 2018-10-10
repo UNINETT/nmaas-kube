@@ -53,7 +53,7 @@ spec:
           readOnly: true
         - mountPath: /etc/authorized_keys
           name: shared-data
-          readOnly: true
+          readOnly: false
 
       initContainers:
         # Init container to grab a copy of the helm user's authorized ssh keys
