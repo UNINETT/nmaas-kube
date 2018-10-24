@@ -54,6 +54,9 @@ spec:
         - mountPath: /etc/authorized_keys
           name: shared-data
           readOnly: false
+        - name: helm-ssh-hostkeys
+          mountPath: /etc/ssh/keys
+          readOnly: false
 
       initContainers:
         # Init container to grab a copy of the helm user's authorized ssh keys
@@ -89,4 +92,6 @@ spec:
             - key: id_rsa_helm.pub
               path: id_rsa_helm.pub
 
-status: {}
+      - name: helm-ssh-hostkeys
+        persistentVolumeClaim:
+          claimName: helm-ssh-hostkeys
