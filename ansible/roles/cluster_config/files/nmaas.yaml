@@ -86,3 +86,18 @@ roleRef:
   name: restricted-chroot-psp
   apiGroup: rbac.authorization.k8s.io
 
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nmaas-cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: nmaas-admin
+    namespace: nmaas
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
