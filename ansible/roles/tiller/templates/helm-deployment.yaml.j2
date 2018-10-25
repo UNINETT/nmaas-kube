@@ -27,6 +27,10 @@ spec:
           value: tiller-deploy:44134
         image: docker.io/mbrekkevold/ssh-helm:latest
         imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+              - SYS_CHROOT
         livenessProbe:
           tcpSocket:
             port: 22
