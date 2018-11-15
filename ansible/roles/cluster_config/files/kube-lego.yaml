@@ -99,8 +99,8 @@ metadata:
   name: kube-lego-nginx
   namespace: kube-system
 data:
-  # modify this to specify your address
-  lego.email: "system-saker@uninett.no"
+  # TODO: find a more permanent address for this
+  lego.email: "morten.brekkevold@uninett.no"
   # configure letencrypt's production api
   lego.url: "https://acme-v01.api.letsencrypt.org/directory"
 kind: ConfigMap
