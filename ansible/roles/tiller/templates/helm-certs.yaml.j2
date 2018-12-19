@@ -14,13 +14,24 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  id_rsa_helm: {{ lookup('file', 'tls/tiller/id_rsa_helm')|b64encode }}
-  id_rsa_helm.pub: {{ lookup('file', 'tls/tiller/id_rsa_helm.pub')|b64encode }}
+  id_rsa: {{ lookup('file', 'tls/tiller/id_rsa_helm')|b64encode }}
 kind: Secret
 metadata:
   labels:
     app: helm
     name: helm
-  name: helm-ssh-keys
+  name: nmaas-helm-key-private
+  namespace: nmaas
+type: Opaque
+---
+apiVersion: v1
+data:
+  helm: {{ lookup('file', 'tls/tiller/id_rsa_helm.pub')|b64encode }}
+kind: Secret
+metadata:
+  labels:
+    app: helm
+    name: helm
+  name: nmaas-helm-key-public
   namespace: nmaas
 type: Opaque

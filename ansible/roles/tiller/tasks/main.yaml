@@ -36,16 +36,7 @@
 - name: Create Tiller service
   command: kubectl apply -f ./tiller_config/svc.yaml
 
-# SSH+Helm cluster internal service
-
-- name: Create Helm pod SSH host key persistent storage
-  command: kubectl apply -f ./tiller_config/helm-pvc.yaml
+# Certificates and SSH keys for cluster internal Helm client service
 
 - name: Create Helm client certificates secret
   command: kubectl apply -f ./tiller_config/helm-certs.yaml
-
-- name: Create SSH+Helm deployment
-  command: kubectl apply -f ./tiller_config/helm-deployment.yaml
-
-- name: Create Helm SSH service
-  command: kubectl apply -f ./tiller_config/helm-svc.yaml
