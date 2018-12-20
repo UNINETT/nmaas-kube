@@ -1,7 +1,7 @@
-PaaS 2 kubernetes platform
-==========================
+NMaaS Kubernetes pilot platform
+===============================
 
-This repository contains scripts and ansible playbooks for managing the PaaS 2 kubernetes platform.
+This repository contains scripts and ansible playbooks for managing the Uninett pilot implementation of the NMaaS Kubernetes platform.
 
 ## Bringing up a test cluster
 
