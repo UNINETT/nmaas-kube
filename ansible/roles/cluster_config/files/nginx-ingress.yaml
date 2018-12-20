@@ -204,7 +204,6 @@ spec:
             - /nginx-ingress-controller
             - --default-backend-service=kube-system/default-http-backend
             - --configmap=$(POD_NAMESPACE)/nginx-ingress-controller
-            - --annotations-prefix=ingress.kubernetes.io
             - --profiling=false
             - --sort-backends
             - --enable-ssl-passthrough
